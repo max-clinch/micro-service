@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: udagram-api-users
+  labels:
+    service: udagram-api-users
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: udagram-api-users
+  template:
+    metadata:
+      labels:
+        service: udagram-api-users
+    spec:
+      containers:
+        - name: udagram-api-users
+          image: khomeafegbua/udagram-api-users:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              memory: '64Mi'
+              cpu: '250m'
+            limits:
+              memory: '1024Mi'
+              cpu: '500m'
+          env:
+            - name: http://localhost:8100
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: http://localhost:8100
+            - name: hellow
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: hellow
+            - name: postgres
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: postgres
+            - name: khome-1.cr9cvmnikkno.us-east-1.rds.amazonaws.com
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: khome-1.cr9cvmnikkno.us-east-1.rds.amazonaws.com
+            - name: khomeafegbua
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: khomeafegbua
+            - name: khome-1
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: khome-1
+      restartPolicy: Always

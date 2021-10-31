@@ -1,0 +1,42 @@
+version: '3'
+services:
+  reverseproxy:
+    image: khomeafegbua/reverseproxy
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - udagram-users
+      - udagram-feed
+  udagram-users:
+    image: khomeafegbua/udagram-api-users
+    volumes:
+      - $HOME/.aws:/root/.aws
+    environment:
+      POSTGRES_USERNAME: khome-1
+      POSTGRES_PASSWORD: khomeafegbua
+      POSTGRES_DB: psstgres
+      POSTGRES_HOST: khome-1.cr9cvmnikkno.us-east-1.rds.amazonaws.com
+      AWS_REGION:  us-east-1
+      AWS_PROFILE: default
+      AWS_MEDIA_BUCKET: lastchance-dev
+      JWT_SECRET: hellow
+      URL: http://localhost:8100
+  udagram-feed:
+    image: khomeafegbua/udagram-api-feed
+    volumes:
+      - $HOME/.aws:/root/.aws
+    environment:
+      POSTGRES_USERNAME: khome-1
+      POSTGRES_PASSWORD: khomeafegbua
+      POSTGRES_DB: psstgres
+      POSTGRES_HOST: khome-1.cr9cvmnikkno.us-east-1.rds.amazonaws.com
+      AWS_REGION: us-east-1
+      AWS_PROFILE: default
+      AWS_MEDIA_BUCKET: lastchance-dev
+      JWT_SECRET: hellow
+      URL: http://localhost:8100
+  udagram-frontend:
+    image: khomeafegbua/udagram-frontend
+    ports:
+      - '8100:80'
