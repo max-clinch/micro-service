@@ -83,18 +83,18 @@ kubectl  apply -f reverseproxy_service.yaml
 ```bash
 # udagram-microservices\udagram-frontend
 docker build -t udagram-frontend .
-docker tag udagram-frontend oussamabouchikhi/udagram-frontend
-docker push oussamabouchikhi/udagram-frontend
+docker tag udagram-frontend khomeafegbua/udagram-frontend
+docker push khomeafegbua/udagram-frontend
 
 # udagram-microservices\udagram-api-users
 docker build -t udagram-api-users .
-docker tag udagram-api-users oussamabouchikhi/udagram-api-users
-docker push oussamabouchikhi/udagram-api-users
+docker tag udagram-api-users khomeafegbua/udagram-api-users
+docker push khomeafegbua/udagram-api-users
 
 # udagram-microservices\udagram-api-feed
 docker build -t udagram-api-feed .
-docker tag udagram-api-feed oussamabouchikhi/udagram-api-feed
-docker push oussamabouchikhi/udagram-api-feed
+docker tag udagram-api-feed khomeafegbua/udagram-api-feed
+docker push khomeafegbua/udagram-api-feed
 
 # Other usefull commands
 docker images
